@@ -1,10 +1,10 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using IntelTypesetDesign.Configuration.Windows;
 using IntelTypesetDesign.ViewModels;
-using IntelTypesetDesign.Views;
+using IntelTypesetDesign.ViewModels.Editor;
 
 namespace IntelTypesetDesign;
 
@@ -16,8 +16,7 @@ public partial class App : Application
     {
         DefaultTheme = "FluentDark";
     }
-    
-    
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -25,17 +24,45 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
-            // Line below is needed to remove Avalonia data validation.
-            // Without this line you will get duplicate validations from both Avalonia and CT
-            BindingPlugins.DataValidators.RemoveAt(0);
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+            InitializationClassicDesktopStyle(desktopLifetime, out var editor);
+            DataContext = editor;
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static void InitializationClassicDesktopStyle(
+        IClassicDesktopStyleApplicationLifetime desktopLifetime,
+        out ProjectEditorViewModel? editor
+    )
+    {
+        var appState = new AppState();
+
+        var mainWindow = appState.ServiceProvider.GetService<Window>();
+        if (mainWindow is null)
+        {
+            editor = null;
+            return;
+        }
+        
+        if (appState.WindowConfiguration is not null)
+        {
+            WindowConfigurationFactory.Load(mainWindow, appState.WindowConfiguration);
+        }
+        
+        mainWindow.DataContext = appState.Editor;
+
+        mainWindow.Closing += (_, _) =>
+        {
+            appState.WindowConfiguration = WindowConfigurationFactory.Save(mainWindow);
+            appState.Save();
+        };
+
+        desktopLifetime.MainWindow = mainWindow;
+        desktopLifetime.Exit += (_, _) => appState.Dispose();
+
+        editor = appState.Editor;
     }
 }

@@ -24,6 +24,7 @@
         <PackageReference Include="Dock.Avalonia" Version="11.0.10" />
         <PackageReference Include="Dock.Model.Mvvm" Version="11.0.10" />
         <PackageReference Include="netDxf.netstandard" Version="3.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
         <PackageReference Include="System.CommandLine.NamingConventionBinder" Version="2.0.0-beta4.22272.1" />
     </ItemGroup>

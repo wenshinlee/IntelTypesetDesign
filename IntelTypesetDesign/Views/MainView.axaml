@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="IntelTypesetDesign.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vmd="clr-namespace:IntelTypesetDesign.ViewModels.Designer"
+    xmlns:vme="clr-namespace:IntelTypesetDesign.ViewModels.Editor"
+    d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+    d:DesignHeight="580"
+    d:DesignWidth="1200"
+    x:DataType="vme:ProjectEditorViewModel"
+    mc:Ignorable="d">
+
+    <Panel>
+        <Panel>
+            <idc:DockControl
+                Layout="{Binding RootDock}" />
+        </Panel>
+    </Panel>
+</UserControl>
