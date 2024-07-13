@@ -1,7 +1,9 @@
 ﻿using System;
 using Autofac;
 using Avalonia.Controls;
+using HanumanInstitute.MvvmDialogs;
 using IntelTypesetDesign.Models;
+using IntelTypesetDesign.Modules.Dialog;
 using IntelTypesetDesign.Modules.FileSystem.DotNet;
 using IntelTypesetDesign.Modules.Log.Trace;
 using IntelTypesetDesign.Modules.ServiceProvider;
@@ -25,6 +27,10 @@ public class AppModule : Module
         // Dependencies
         builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
         builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+        
+        // MVVM Dialogs
+        builder.RegisterType<DialogProvider>().As<IDialogService>().InstancePerLifetimeScope();
+
         
         // Views
         builder.RegisterType<MainWindow>().As<Window>().InstancePerLifetimeScope();

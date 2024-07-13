@@ -17,6 +17,9 @@
         <Panel>
             <idc:DockControl
                 Layout="{Binding RootDock}" />
+            <Button
+                Command="{Binding TestButtonCommand}"
+                Content="TestButton" />
         </Panel>
     </Panel>
 </UserControl>

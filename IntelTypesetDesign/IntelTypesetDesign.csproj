@@ -24,6 +24,8 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="Dock.Avalonia" Version="11.0.10" />
         <PackageReference Include="Dock.Model.Mvvm" Version="11.0.10" />
+        <PackageReference Include="HanumanInstitute.MvvmDialogs.Avalonia" Version="2.1.0" />
+        <PackageReference Include="HanumanInstitute.MvvmDialogs.Avalonia.MessageBox" Version="2.1.0" />
         <PackageReference Include="netDxf.netstandard" Version="3.0.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
@@ -31,6 +33,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Docking\" />
+      <Folder Include="ViewModels\Docking\Docks\" />
+      <Folder Include="ViewModels\Docking\Documents\" />
+      <Folder Include="ViewModels\Ribbon\" />
+      <Folder Include="Views\Docking\Documents\" />
+      <Folder Include="Views\Docking\Tools\" />
+      <Folder Include="Views\Docking\Views\" />
+      <Folder Include="Views\Ribbon\" />
     </ItemGroup>
 </Project>
